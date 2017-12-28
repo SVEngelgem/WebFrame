@@ -1,3 +1,26 @@
-<agm-map [latitude]="map.lat" [longitude]="map.lng" style="height: 300px">
-    <agm-marker [latitude]="map.lat" [longitude]="map.lng"></agm-marker>
-</agm-map>        
+
+<dif class="card" *ngIf="resultaat">
+  <h1>{{ title }}</h1>
+  <dif>
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12">
+        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        <agm-polygon *ngFor="let paths of resultaat.data"
+          [paths]="paths.geometry">
+        </agm-polygon>
+      </agm-map>
+  </dif>
+  
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+
+  <h1>test</h1>
+    <table class="table table-hover">
+    <tbody>
+        <tr *ngFor="let totaal of resultaat.data">
+            <td>{{totaal.objectid}}</td>
+            <td>{{totaal.id}}</td>
+            <td>{{totaal.geometry}}</td>
+          </tr>
+    </tbody>
+  </table>
+</dif>

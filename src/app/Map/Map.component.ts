@@ -1,27 +1,25 @@
-import { Component } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser'
-
-import { AgmCoreModule } from '@agm/core';
-import { NgModule } from '@angular/core/src/metadata/ng_module';
-import { AppComponent } from '../app.component';
+import { Component, OnInit } from '@angular/core';
+import { Coordinatenresults , MapPolygonService } from '../services/lezafbakening.service';
 
 @Component({
-  selector: 'app-Map',
-  templateUrl: './Map.component.html',
-  styles['agm-map { height: 300px;}']
+  selector: 'app-map',
+  templateUrl: './map.component.html',
+  styleUrls: ['./map.component.scss']
 })
-export class MapComponent {
-  public map: any = {lat: 51.2296677, lng: 4.4179746 }
+export class MapComponent implements OnInit {
+
+  title = 'app';
+  // test voor agm
+  lat: number = 51.2196598;
+  lng: number = 4.4044685;
+  
+  constructor(private _svc: MapPolygonService) { }
+
+  resultaat : Coordinatenresults;
+  ngOnInit() {
+    this._svc.getDataExtra()
+              .subscribe(result => this.resultaat = result)
+  }
+
 }
 
-@NgModule({
-    imports:[
-        BrowserModule,
-        agmCoreModule.forRoot({
-            apiKey:''
-        })
-    ],
-    declarations: [ AppComponent ],
-    bootstrap: [ AppComponent ]
-})
-export class AppModule {}

@@ -3,16 +3,18 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/do";
 import "rxjs/add/observable/of";
+import "rxjs/add/operator/map"
+import { LatLngLiteral } from "@agm/core/services/google-maps-types";
 
 @Injectable()
 export class MapPolygonService {
     constructor(private _http: HttpClient){}
-        getPolygon(): Observable<Coordinatenresults>{
-            return this._http.get<Coordinatenresults>("http://datasets.antwerpen.be/v4/gis/lezafbakening.json")
+        getPolygon(): Observable<CoordinatenresultsRoot>{
+            return this._http.get<CoordinatenresultsRoot>("http://datasets.antwerpen.be/v4/gis/lezafbakening.json")
         }
-        getDataExtra(): Observable<Coordinatenresults>{
-            return this._http.get<Coordinatenresults>("http://datasets.antwerpen.be/v4/gis/lezafbakening.json")
-            
+        getDataExtra(): Observable<CoordinatenresultsRoot>{
+            return this._http.get<CoordinatenresultsRoot>("http://datasets.antwerpen.be/v4/gis/lezafbakening.json")
+            .map(root => {root.data.forEach(data => data.geometry2 = JSON.parse(data.geometry)); return root})
         
     }
 }
@@ -29,7 +31,8 @@ export interface Paging {
 export interface Datum {
     id: number;
     objectid: number;
-    geometry: any;
+    geometry: string;
+    geometry2: Coordinaten;
     shape?: any;
     gisid: string;
     naam: string;
@@ -38,8 +41,13 @@ export interface Datum {
     datum: string;
 }
 
-export interface Coordinatenresults {
+export interface CoordinatenresultsRoot {
     paging: Paging;
     data: Datum[];
+}
+
+export interface Coordinaten {
+    type: string;
+    coordinates: number[][][];
 }
 

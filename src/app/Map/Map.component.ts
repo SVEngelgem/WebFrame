@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Coordinatenresults , MapPolygonService } from '../services/lezafbakening.service';
+import {MapPolygonService, CoordinatenresultsRoot, Coordinaten } from '../services/lezafbakening.service';
+import { LatLng, LatLngLiteral } from '@agm/core/services/google-maps-types';
 
 @Component({
   selector: 'app-map',
@@ -12,14 +13,18 @@ export class MapComponent implements OnInit {
   // test voor agm
   lat: number = 51.2196598;
   lng: number = 4.4044685;
-  
+  paths: Array<LatLng|LatLngLiteral> = [];
   constructor(private _svc: MapPolygonService) { }
 
-  resultaat : Coordinatenresults;
+  resultaat : CoordinatenresultsRoot;
+  pathdata: Coordinaten;
+
+
+
   ngOnInit() {
     this._svc.getDataExtra()
               .subscribe(result => this.resultaat = result)
-  }
 
+  }
 }
 

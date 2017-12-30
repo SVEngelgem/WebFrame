@@ -4,8 +4,8 @@
   <dif>
     <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12">
         <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-        <agm-polygon *ngFor="let paths of resultaat.data"
-          [paths]="paths.geometry">
+        <agm-polygon *ngFor="let totaal of resultaat.data"
+          [paths]="paths">
         </agm-polygon>
       </agm-map>
   </dif>
@@ -19,6 +19,7 @@
         <tr *ngFor="let totaal of resultaat.data">
             <td>{{totaal.objectid}}</td>
             <td>{{totaal.id}}</td>
+            <td>{{totaal.geometry2}}</td>
             <td>{{totaal.geometry}}</td>
           </tr>
     </tbody>

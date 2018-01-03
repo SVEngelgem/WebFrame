@@ -15,6 +15,10 @@ export class MapPolygonService {
         getDataExtra(): Observable<CoordinatenresultsRoot>{
             return this._http.get<CoordinatenresultsRoot>("http://datasets.antwerpen.be/v4/gis/lezafbakening.json")
             .map(root => {root.data.forEach(data => data.geometry2 = JSON.parse(data.geometry)); return root})
+            .map(root => {root.data.forEach(data => data.geometry2.coordinates = )})
+            
+            
+            
         
     }
 }

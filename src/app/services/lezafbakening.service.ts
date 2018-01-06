@@ -15,12 +15,8 @@ export class MapPolygonService {
         getDataExtra(): Observable<CoordinatenresultsRoot>{
             return this._http.get<CoordinatenresultsRoot>("http://datasets.antwerpen.be/v4/gis/lezafbakening.json")
             .map(root => {root.data.forEach(data => data.geometry2 = JSON.parse(data.geometry)); return root})
-            .map(root => {root.data.forEach(data => data.geometry2.coordinates = )})
-            
-            
-            
-        
-    }
+            .map(root => { root.data.forEach(data => data.geometry2.coordinaten = data.geometry2.coordinates.map<(LatLngLiteral)[]>(c => c.map<(LatLngLiteral)>(cc => <LatLngLiteral>{ lat: cc[1], lng: cc[0] }))); return root })
+    }   
 }
 
 export interface Paging {
@@ -53,5 +49,7 @@ export interface CoordinatenresultsRoot {
 export interface Coordinaten {
     type: string;
     coordinates: number[][][];
+    coordinaten: (LatLngLiteral)[][];
+    coordinatenreverse: (LatLngLiteral)[][];
 }
 

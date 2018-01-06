@@ -9,7 +9,6 @@ import { LatLng, LatLngLiteral } from '@agm/core/services/google-maps-types';
 })
 export class MapComponent implements OnInit {
 
-  title = 'app';
   // test voor agm
   lat: number = 51.2196598;
   lng: number = 4.4044685;

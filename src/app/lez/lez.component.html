@@ -1,0 +1,53 @@
+
+
+<div class="container" *ngIf="resultaat">
+    <div class="row">
+
+        <div class="col w-75 p-3">
+            <p class="font-weight-bold">
+                Op 1 februari 2017 werd op de Antwerpse binnenstad en 
+                Linkeroever een lage-emissiezone (LEZ) ingevoerd. Voertuigen die veel roet
+                 en fijnstof uitstoten, mogen de zone niet meer in rijden.
+                  Sommige auto’s mogen de zone pas in nadat ze geregistreerd 
+                  zijn. De registratietool staat online op <a href={{SNAhome}} target="blank">SlimNaarAnterpen</a>
+              </p>
+            <p>
+                De meeste voertuigen met Belgische en Nederlandse nummerplaat
+                 mogen automatisch binnen. Dit geldt bijvoorbeeld voor 
+                 benzinewagens met euronorm 1 of hoger en dieselwagens 
+                 met euronorm 4 of hoger. Ook dieselwagens met euronorm 3 
+                 met een roetfilter mogen de zone nog inrijden. Elke automobilist 
+                 kijkt het best tijdig na of zijn of haar voertuig voldoet aan 
+                 de LEZ-normen. Dat kan met deze test <a class="font-weihgt-bold" href={{SNAtoegelaten}} target="blank">deze test</a>
+              </p>
+              <p>
+                Sommige voertuigen mogen pas binnen nadat ze geregistreerd zijn, 
+                er een toelating is aangekocht of als u in het bezit bent van een LEZ-dagpas.
+            </p>
+        </div>
+
+        <div class="col w-15 p-3">
+            <button type="button" class="btn btn-default waves-light" mdbRippleRadius (click)="click(1)">Registratie/Aankopen toelating voor voertuig</button>
+            <button type="button" class="btn btn-default waves-light" mdbRippleRadius (click)="click(2)">aankopen dagpas</button>
+        </div>
+        <div class="col w10 p3"
+        *ngFor="let totaal of resultaat.data">
+            <div class="card-block">
+                <h5 class="font-weight-bold">Enkele stomme weetjes:</h5>
+                <ul class="list-group">
+                  <li class="list-group-item">Oprichtings Datum: 
+                    <strong>{{totaal.datum}}</strong>
+                  </li>
+                  <li class="list-group-item" >Omtrek LEZ: 
+                    <strong>{{totaal.shape_length}} Meter</strong>
+                  </li>
+                  <li class="list-group-item">Oppervlake LEZ
+                      <strong>{{totaal.shape_area }} M²</strong>
+                    </li>
+
+                </ul>
+              </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="container" *ngIf="resultaat" >
+      <h1 *ngFor="let totaal of resultaat.data">Is je bestemming binnen de {{totaal.naam}}?</h1>
+    <div class="form-group">
+      <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+    </div>
+    <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="True" [zoom]="zoom">
+      <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+      <agm-polygon *ngFor="let totaal of resultaat.data"
+          [paths]="totaal.geometry2.coordinaten">
+        </agm-polygon>
+    </agm-map>
+  </div>

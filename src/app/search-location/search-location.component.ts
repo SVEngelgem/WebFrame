@@ -18,6 +18,7 @@ export class SearchLocationComponent implements OnInit {
   public searchControl: FormControl;
   public zoom: number;
   public keuze: boolean;
+  count: number;
   SNAtoegelaten : string="https://lez.antwerpen.be/?Taal=NL";
   test: number;
   resultaat : CoordinatenresultsRoot;
@@ -82,8 +83,6 @@ export class SearchLocationComponent implements OnInit {
           }else{
             this.keuze !=true;
           }
-          
-          console.log(this.keuze);
         });
       });
     });
@@ -99,14 +98,31 @@ export class SearchLocationComponent implements OnInit {
     }
   }
   private testinside(): boolean{
+    //ergens zit hier iets fout, maar ik weet niet wat, 
+    //maar het werkt
     var inside = require('point-in-polygon');
     // op juiste manier data hier proberen te krijgen
-    //var polygon = this.pathdata.coordinates;
-    var polygon = [ [ 1, 1 ], [ 1, 2 ], [ 2, 2 ], [ 2, 1 ] ];
+    var polygon = this.pathdata.coordinates;
+    this.keuze = false;
+      
+    for (this.count = 0; this.count < polygon.length; this.count++){
+      console.log(this.latitude, this.longitude);
+      
+      if (inside([this.longitude ,this.latitude ],polygon[this.count])===true){
+        console.log(this.keuze);
+        console.log(inside);
+        this.keuze = true;
+        return inside;
+
+      }
+      //console.log(Array.from(polygon), x => Array.prototype.forEach(Array.of(Array:a)));
+    }
+    
+    //var polygon2 = [ [ 1, 1 ], [ 1, 2 ], [ 2, 2 ], [ 2, 1 ] ];
     // de coordinaten value moet van een doorlopende array, naar tzelfde als coordinates maar dan niet als latlng
     //console.dir([inside([this.longitude ,this.latitude ], polygon)])
-    console.dir([inside([1.5 ,1.5 ], polygon)])
-    return this.keuze = true;
+    //console.dir([inside([1.5 ,1.5 ], polygon2)])
+    //return this.keuze = true;
 
   }
   private CoordinateResults(result: CoordinatenresultsRoot): Coordinaten{
@@ -118,7 +134,6 @@ export class SearchLocationComponent implements OnInit {
   }
   private click(test): void{
     this.test = test;
-    console.log(test);
     if (this.test == 1){
       window.open(this.SNAtoegelaten,'_blank')
     }

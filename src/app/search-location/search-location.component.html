@@ -1,12 +1,24 @@
-<div class="container" *ngIf="resultaat" >
-      <h1 *ngFor="let totaal of resultaat.data">Is je bestemming binnen de {{totaal.naam}}?</h1>
+<div class="container" *ngIf="pathdata" >
+      <h1>Is je bestemming binnen de {{pathdata.naam}}?</h1>
+      <div *ngIf="keuze">      
+        <p> Je Bestemming bevind zich binnen de {{pathdata.naam}}</p>
+        <p> Het is een goed idee om te checken of je auto binnen de {{pathdata.naam}} mag rijden.
+          Dit kan via deze link.
+        </p>
+        <button type="button" class="btn btn-default waves-light" mdbRippleRadius (click)="click(1)">Is je voertuig toegelaten binnen de {{pathdata.naam}}?</button>
+      </div>
+      <div *ngIf="!keuze">      
+          <a>Je Bestemming ligt buiten de {{pathdata.naam}}.</a>
+          <a>Je hoeft je geen zorgen te maken over de toelating binnen de {{pathdata.naam}}.</a>
+        </div>
+
     <div class="form-group">
-      <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+      <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formcontrol]="searchControl">
     </div>
     <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="True" [zoom]="zoom">
       <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-      <agm-polygon *ngFor="let totaal of resultaat.data"
-          [paths]="totaal.geometry2.coordinaten">
+      <agm-polygon *ngFor="let totaal of pathdata.coordinaten"
+          [paths]="totaal">
         </agm-polygon>
     </agm-map>
   </div>

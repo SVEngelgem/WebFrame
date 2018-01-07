@@ -50,6 +50,6 @@ export interface Coordinaten {
     type: string;
     coordinates: number[][][];
     coordinaten: (LatLngLiteral)[][];
-    coordinatenreverse: (LatLngLiteral)[][];
+    coordinatenreverse: number[][];
 }
 
